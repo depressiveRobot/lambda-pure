@@ -1,15 +1,8 @@
-# λ Pure
+# pure-time
 
 > Pretty, minimal and fast ZSH prompt based on Pure
 
-<img src="screenshot.png" width="864">
-
-
-## Overview
-
-Most prompts are cluttered, ugly and slow. I wanted something visually pleasing that stayed out of my way.
-
-### Why?
+<img src="screenshot.png" width="768">
 
 - Comes with the `λ` prompt character. Because lambdas are cool.
 - Shows `git` branch and whether it's dirty (with a `×`).
@@ -18,35 +11,57 @@ Most prompts are cluttered, ugly and slow. I wanted something visually pleasing 
 - Prompt character turns red if the last command didn't exit with `0`.
 - Command execution time will be displayed if it exceeds the set threshold.
 - Username and host only displayed when in an SSH session.
-- Shows the current path in the title and the [current folder & command](screenshot-title-cmd.png) when a process is running.
+- Shows the current path in the title and the current folder & command when a process is running.
 
 ## Install
 
-Can be installed with `npm` or manually. Requires git 2.0.0+ and ZSH 5.0.0+.
+### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
-### npm
+1. Symlink (or copy) `pure-time.zsh` to `~/.oh-my-zsh/custom/themes/pure-time.zsh-theme`.
+2. Set `ZSH_THEME="pure-time"` in your `.zshrc` file.
+
+### [antigen](https://github.com/zsh-users/antigen)
+
+Update your `.zshrc` file with the following two lines (order matters). Do not use the `antigen theme` function.
 
 ```console
-$ npm install --global lambda-pure-prompt
+$ antigen bundle mafredri/zsh-async
+$ antigen bundle depressiveRobot/pure-time
 ```
 
-That's it. Skip to [Getting started](#getting-started).
+### [antibody](https://github.com/getantibody/antibody)
+
+Update your `.zshrc` file with the following two lines (order matters):
+
+```console
+$ antibody bundle mafredri/zsh-async
+$ antibody bundle depressiveRobot/pure-time
+```
+
+### [zgen](https://github.com/tarjoilija/zgen)
+
+Update your `.zshrc` file with the following two lines (order matters):
+
+```console
+$ zgen load mafredri/zsh-async
+$ zgen load depressiveRobot/pure-time
+```
 
 ### Manually
 
 1. Either…
   - Clone this repo
   - add it as a submodule, or
-  - just download `lambda-pure.zsh` and `async.zsh`
+  - just download `pure-time.zsh` and `async.zsh`
 
-2. Symlink `lambda-pure.zsh` to somewhere in [`$fpath`](http://www.refining-linux.org/archives/46/ZSH-Gem-12-Autoloading-functions/) with the name `prompt_lambda-pure_setup`.
+2. Symlink `pure-time.zsh` to somewhere in [`$fpath`](http://www.refining-linux.org/archives/46/ZSH-Gem-12-Autoloading-functions/) with the name `prompt_pure-time_setup`.
 
 3. Symlink `async.zsh` in `$fpath` with the name `async`.
 
 #### Example
 
 ```console
-$ ln -s "$PWD/lambda-pure.zsh" /usr/local/share/zsh/site-functions/prompt_lambda-pure_setup
+$ ln -s "$PWD/pure-time.zsh" /usr/local/share/zsh/site-functions/prompt_pure-time_setup
 $ ln -s "$PWD/async.zsh" /usr/local/share/zsh/site-functions/async
 ```
 *Run `echo $fpath` to see possible locations.*
@@ -61,21 +76,19 @@ fpath=( "$HOME/.zfunctions" $fpath )
 Then install the theme there:
 
 ```console
-$ ln -s "$PWD/lambda-pure.zsh" "$HOME/.zfunctions/prompt_lambda-pure_setup"
+$ ln -s "$PWD/pure-time.zsh" "$HOME/.zfunctions/prompt_pure-time_setup"
 $ ln -s "$PWD/async.zsh" "$HOME/.zfunctions/async"
 ```
 
-
 ## Getting started
 
-Initialize the prompt system (if not so already) and choose `lambda-pure`:
+Initialize the prompt system (if not so already) and choose `pure-time`:
 
 ```sh
 # .zshrc
 autoload -U promptinit; promptinit
-prompt lambda-pure
+prompt pure-time
 ```
-
 
 ## Options
 
@@ -121,44 +134,9 @@ autoload -U promptinit; promptinit
 # optionally define some options
 PURE_CMD_MAX_EXEC_TIME=10
 
-prompt lambda-pure
-```
-
-## Integration
-
-### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-
-1. Symlink (or copy) `lambda-pure.zsh` to `~/.oh-my-zsh/custom/themes/lambda-pure.zsh-theme`.
-2. Set `ZSH_THEME="lambda-pure"` in your `.zshrc` file.
-
-### [antigen](https://github.com/zsh-users/antigen)
-
-Update your `.zshrc` file with the following two lines (order matters). Do not use the `antigen theme` function.
-
-```console
-$ antigen bundle mafredri/zsh-async
-$ antigen bundle marszall87/lambda-pure
-```
-
-### [antibody](https://github.com/getantibody/antibody)
-
-Update your `.zshrc` file with the following two lines (order matters):
-
-```console
-$ antibody bundle mafredri/zsh-async
-$ antibody bundle marszall87/lambda-pure
-```
-
-### [zgen](https://github.com/tarjoilija/zgen)
-
-Update your `.zshrc` file with the following two lines (order matters):
-
-```console
-$ zgen load mafredri/zsh-async
-$ zgen load marszall87/lambda-pure
+prompt pure-time
 ```
 
 ## License
 
-MIT © [Michał Nykiel](https://github.com/marszall87)
-based on [Pure by Sindre Sorhus](https://github.com/sindresorhus/pure)
+MIT © based on [Pure by Sindre Sorhus](https://github.com/sindresorhus/pure)

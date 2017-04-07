@@ -1,7 +1,10 @@
 # λ Pure
-# by Michał Nykiel
-# https://github.com/marszall87/lambda-pure
+# by depressiveRobot
+# https://github.com/depressiveRobot/pure-time
 # MIT License
+#
+# based on λ Pure by Michał Nykiel
+# https://github.com/marszall87/lambda-pure
 #
 # based on Pure by Sindre Sorhus
 # https://github.com/sindresorhus/pure
