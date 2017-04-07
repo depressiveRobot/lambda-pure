@@ -139,7 +139,7 @@ prompt_pure_preprompt_render() {
 	[[ -n ${prompt_pure_cmd_timestamp+x} && "$1" != "precmd" ]] && return
 
 	# set color for git branch/dirty status, change color if dirty checking has been delayed
-	local git_color=242
+	local git_color=245
 	[[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=red
 
 	# construct preprompt, beginning with path
@@ -150,11 +150,9 @@ prompt_pure_preprompt_render() {
 	preprompt+="%F{yellow}${prompt_pure_git_arrows}%f"
 	# username and machine if applicable
 	preprompt+=$prompt_pure_username
-	# execution time
-	preprompt+="%F{cyan}${prompt_pure_cmd_exec_time}%f"
 
-	# NodeJS version
-	local rpreprompt="%F{green}⬢ ${prompt_pure_node_version}%f"
+	# current time
+	local rpreprompt="%F{245}$(date +%H:%M:%S)%f"
 
 	integer preprompt_left_length preprompt_right_length space_length
 	prompt_pure_string_length_to_var "${preprompt}" "preprompt_left_length"
@@ -276,10 +274,6 @@ prompt_pure_async_git_fetch() {
 	GIT_TERMINAL_PROMPT=0 command git -c gc.auto=0 fetch
 }
 
-prompt_pure_async_node() {
-	echo "$(PATH=$1 command node -v | cut -c2- )"
-}
-
 prompt_pure_async_tasks() {
 	# initialize async worker
 	((!${prompt_pure_async_init:-0})) && {
@@ -304,7 +298,7 @@ prompt_pure_async_tasks() {
 		prompt_pure_current_working_tree="x${working_tree}"
 	fi
 
-	async_job "prompt_pure" prompt_pure_async_node "$PATH"
+	async_job "prompt_pure" "$PATH"
 
 	# only perform tasks inside git working tree
 	[[ -n $working_tree ]] || return
@@ -342,10 +336,6 @@ prompt_pure_async_callback() {
 			;;
 		prompt_pure_async_git_fetch)
 			prompt_pure_check_git_arrows
-			prompt_pure_preprompt_render
-			;;
-		prompt_pure_async_node)
-			prompt_pure_node_version=$output
 			prompt_pure_preprompt_render
 			;;
 	esac
@@ -386,13 +376,13 @@ prompt_pure_setup() {
 	fi
 
 	# show username@host if logged in through SSH
-	[[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username=' %F{242}%n@%m%f'
+	[[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username=' %F{245}%n@%m%f'
 
 	# show username@host if root, with username in white
-	[[ $UID -eq 0 ]] && prompt_pure_username=' %F{white}%n%f%F{242}@%m%f'
+	[[ $UID -eq 0 ]] && prompt_pure_username=' %F{white}%n%f%F{245}@%m%f'
 
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT="%(?.%F{yellow}.%F{red})${PURE_PROMPT_SYMBOL:-λ}%f "
+	PROMPT="%(?.%F{yellow}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 }
 
 prompt_pure_setup "$@"
