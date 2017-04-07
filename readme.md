@@ -4,16 +4,25 @@
 
 <img src="screenshot.png" width="768">
 
-- Comes with the `λ` prompt character. Because lambdas are cool.
+- Comes with the `❯` prompt character.
 - Shows `git` branch and whether it's dirty (with a `×`).
 - Indicates when you have unpushed/unpulled `git` commits with up/down triangles. *(Check is done asynchronously!)*
-- Shows current NodeJS version on the right side. *(Check is done asynchronously!)*
 - Prompt character turns red if the last command didn't exit with `0`.
 - Command execution time will be displayed if it exceeds the set threshold.
 - Username and host only displayed when in an SSH session.
 - Shows the current path in the title and the current folder & command when a process is running.
+- Shows the current time on the right side of the prompt.
 
 ## Install
+
+### [zgen](https://github.com/tarjoilija/zgen)
+
+Update your `.zshrc` file with the following two lines (order matters):
+
+```console
+$ zgen load mafredri/zsh-async
+$ zgen load depressiveRobot/pure-time
+```
 
 ### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
@@ -36,15 +45,6 @@ Update your `.zshrc` file with the following two lines (order matters):
 ```console
 $ antibody bundle mafredri/zsh-async
 $ antibody bundle depressiveRobot/pure-time
-```
-
-### [zgen](https://github.com/tarjoilija/zgen)
-
-Update your `.zshrc` file with the following two lines (order matters):
-
-```console
-$ zgen load mafredri/zsh-async
-$ zgen load depressiveRobot/pure-time
 ```
 
 ### Manually
@@ -110,7 +110,7 @@ Time in seconds to delay git dirty checking for large repositories (git status t
 
 ### `PURE_PROMPT_SYMBOL`
 
-Defines the prompt symbol. The default value is `λ`.
+Defines the prompt symbol. The default value is `❯`.
 
 ### `PURE_GIT_DOWN_ARROW`
 
@@ -139,4 +139,4 @@ prompt pure-time
 
 ## License
 
-MIT © based on [Pure by Sindre Sorhus](https://github.com/sindresorhus/pure)
+MIT © [depressiveRobot](http://depressiverobot.com) based on [λ Pure by Michał Nykiel](https://github.com/marszall87/lambda-pure)
