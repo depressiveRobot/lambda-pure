@@ -260,7 +260,7 @@ prompt_pure_async_git_dirty() {
 	if [[ "$untracked_dirty" == "0" ]]; then
 		command git diff --no-ext-diff --quiet --exit-code
 	else
-		test -z "$(command git status --porcelain --ignore-submodules -unormal)"
+		test -z "$(command git status --porcelain -unormal)"
 	fi
 
 	(( $? )) && echo " %F{red}${PURE_GIT_DIRTY:-×}%f"
